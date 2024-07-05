@@ -60,7 +60,7 @@ class FlightSearch:
 
         return code
 
-    def check_flights(self, city, origin_city):
+    def check_flights(self, city, origin_city, is_direct=True):
         headers = {"Authorization": f"Bearer {self._token}"}
         query = {
             "originLocationCode": origin_city,
@@ -68,7 +68,7 @@ class FlightSearch:
             "departureDate": DEPARTURE_DATE.strftime("%Y-%m-%d"),
             "returnDate": RETURN_DATE.strftime("%Y-%m-%d"),
             "adults": 1,
-            "nonStop": "true",
+            "nonStop": "true" if is_direct else "false",
             "currencyCode": "GBP",
             "max": 10
         }
